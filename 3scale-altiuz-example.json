@@ -1,0 +1,135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Example 3scale",
+    "description": "API para consultar usuarios de un backend en NestJS",
+    "contact": {
+      "name": "Matias Lagos",
+      "url": "https://github.com/Maaato/nestjs-starter-rest",
+      "email": "mlagos@altiuz.com"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0"
+  },
+  "basePath": "/api",
+  "paths": {
+    "/employes": {
+      "get": {
+        "tags": [
+          "employers"
+        ],
+        "summary": "employers List",
+        "description": "List of Employers obtained",
+        "operationId": "ListEmployers",
+        "responses": {
+          "200": {
+            "description": "Employers Array",
+            "schema": {
+              "$ref": "#/definitions/GetEmployerResponse"
+            }
+          }
+        }
+      }
+    },
+    "/employes/{id}": {
+      "get": {
+        "tags": [
+          "employers"
+        ],
+        "summary": "Get employer from ID",
+        "description": "Get Employer with ID",
+        "operationId": "GetEmployer",
+        "responses": {
+          "200": {
+            "description": "Employer obtained by ID",
+            "schema": {
+              "$ref": "#/definitions/GetEmployerResponse"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Employer ID",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "employers",
+      "description": "Employers Resource"
+    }
+  ],
+  "definitions": {
+    "Employer": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "number"
+        }
+      }
+    },
+    "GetEmployerResponse": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "number"
+        },
+        "statusMsg": {
+          "type": "string"
+        },
+        "data": {
+          "items": {
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "id": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "$ref": "#/definitions/Employer"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api-key": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "api-key": []
+    }
+  ]
+}
